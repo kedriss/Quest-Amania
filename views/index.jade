@@ -1,0 +1,68 @@
+extends layout
+block content
+    - var linkToModify ={}
+    center
+        #gauche
+            #blanc
+            #gaucheCenter(ondrop="drop(event,'gaucheCenter')",ondragover="allowDrop(event)")
+            each Link, index in gaucheCenter
+                a(ondragstart="drag(event)" ,draggable=true,id=Link.nom,href=Link.liens,target="_blank",value=Link.nom)
+                    .contenu
+                        if Link.image
+                            img(src=Link.image,class='png')
+                        =Link.nom
+        #droite
+            #blanc
+            #droiteCenter(ondrop="drop(event,'gaucheCenter')",ondragover="allowDrop(event)")
+            each Link, index in droiteCenter
+                a(ondragstart="drag(event)" ,draggable=true,id=Link.nom,href=Link.liens,target="_blank",value=Link.nom)
+                    .contenu
+                        if Link.image
+                            img(src=Link.image,class='png')
+                        =Link.nom
+        #centre
+            button(id="ajouter", class='ajouter', data-toggle="modal", data-target="#formulaire")='+'
+            FORM(method=GET, action="http://www.google.fr/search")
+                #google
+                    tr
+                        td
+                            a(HREF="http://www.google.fr")
+                            IMG(SRC="http://www.google.com/logos/Logo_40wht.gif", border="0", ALT="Google", align="absmiddle")
+                            INPUT(TYPE='text', name='q', size=31, maxlength=255, value="")
+                            INPUT(TYPE='hidden', name=hl ,value=fr)
+                            INPUT(type='submit', name=btnG, VALUE="Recherche Google")
+
+        #formulaire(class="modal fade", role="dialog")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        button(type="button", class="close", data-dismiss="modal")
+                        h4(class="modal-title")="Ajouter un lien"
+                    .modal-body
+                        p="Merci de renseigner au moins un nom et le liens correspondant"
+                        label(for="aModifier")="Modifier"
+                        select(id='aModifier',class="form-control")
+                            option
+                            each Link, index in gaucheCenter
+                                option(value='gaucheCenter;'+Link._id)=Link.nom
+                            each Link, index in droiteCenter
+                                option(value='droiteCenter;'+Link._id)=Link.nom
+                        label(for="nom")=" Nom  :"
+                        input( type="text", class="form-control",name="nom", id="nom",value=linkToModify.nom)
+                        label(for="liens")="Liens:"
+                        input(type="text", class="form-control", name="liens", id="liens", value=linkToModify.liens)
+                        label(for="image")="Image.extension:"
+                        input(type="text",class="form-control",name="image" id="image", value=linkToModify.image)
+                        label(for="cote")="Coté:"
+                        select(id="cote", type="select", class="form-control")
+                            option(value="gaucheCenter")='Gauche'
+                            option(value="droiteCenter")='Droite'
+                        label(for="sequence")="Ordre"
+                        input(id="sequence", type="number", class="form-control", min="0", value=linkToModify.ordre)
+                        .modal-footer
+                            button(id="Supprimer", type="button", class="btn btn-default")="Supprimer"
+                            button(id="Appliquer", type="button", class="btn btn-default")='Appliquer'
+                            button(type="button", class="btn btn-default", data-dismiss="modal")='Fermer'
+        button(id='trash', ondrop="drop(event)", ondragover="allowDrop(event)")
+            span(id='trash', class="glyphicon glyphicon-trash")
+            i(id='trash')="Supprimer"

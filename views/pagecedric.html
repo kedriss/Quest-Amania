@@ -1,0 +1,322 @@
+<head>
+	<title>Salut beau gosse</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf8" />
+	<link rel="stylesheet" type="text/css" href="../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/bootstrap/css/bootstrap.min.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/Css/style.css" media="screen" />
+	<link rel='stylesheet' href='../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/pages/jquery-ui-1.10.3/themes/base/jquery-ui.css' >
+	<script src='../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/pages/jquery.js'></script>
+	<script src='../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/pages/data.js'></script>
+	<script src='../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/pages/jquery-ui-1.10.3/ui/jquery-ui.js'></script>
+	<script src='../../../../../wamp/www/1rere%20annee/site%20internet/page_accueil/bootstrap/js/bootstrap.min.js'></script>
+	
+	<script>
+	var _deleted =[];
+	///////////////////// DRAG n DROP
+	function allowDrop(ev) {
+		ev.preventDefault();
+	}
+
+	function drag(ev) {
+		$('#trash').show(100);
+		ev.dataTransfer.setData("text", ev.target.id);
+		
+	}
+
+	function drop(ev, id) {
+		ev.preventDefault();
+		
+		var data = ev.dataTransfer.getData("text");
+		if(id){ //from gauche ou droite
+		var removed =remove(data);
+			if(removed)donnees[id].infos.push(removed); 
+			else{
+			removed =cancelDeletion(id);
+				if(removed) donnees[id].infos.push(removed);
+			} 
+			$('#'+id).append(document.getElementById(data));
+		}
+		else {
+			ev.target.appendChild(document.getElementById(data));
+			if(ev.target.id =="trash"){
+				remove(data,id);
+			}
+		}
+		updateLink();
+		$('#trash').hide(500);
+	}
+	
+	///////// FIN DRAG n DROP////////////////////
+	function findLink(nom){
+		var result;
+		donnees.gaucheCenter.infos.forEach(function(variable){
+				if (variable.nom === nom){
+					result=variable;
+				}					
+		})
+		donnees.droiteCenter.infos.forEach(function(variable){
+				if (variable.nom === nom){
+					result=variable;
+			}					
+		})
+		return result;
+	}
+	function remove(nom,skipIt){
+		let objet;
+		var infos =[];
+		donnees.gaucheCenter.infos.forEach(function(variable){
+				if (variable.nom == nom){
+					objet=variable;
+				}
+				else{
+					infos.push(variable);
+				}				
+		})
+		donnees.gaucheCenter.infos = infos;
+		infos = [];
+		if(!objet){donnees.droiteCenter.infos.forEach(function(variable){
+			if (variable.nom == nom){
+				objet=variable;
+			}
+			else{
+				infos.push(variable);
+			}				
+		})
+		donnees.droiteCenter.infos = infos;
+		
+		}
+		
+		if(objet && !skipIt)_deleted.push(objet);
+	return objet;
+	}
+	
+	function cancelDeletion(name){
+		var to_delete;
+		var objet;
+		for (var key in _deleted){
+			if (_deleted[key].nom   == name )
+				objet = _deleted[key];
+				to_delete=key;
+		}
+		
+		if(to_delete){
+		_deleted.splice(to_delete);
+		}
+		return objet;
+	}
+	function ajouterLiens( idBlock, variable){
+		var liens ="<a ondragstart='drag(event)'draggable='true' id='"+variable.nom+"' href='"+variable.liens+"' target=_blank>";
+		var contenu="<div class='contenu'>";
+		var image = (variable.image && variable.image.length)? "<img src='"+variable.image+"' class='png'>": "";
+		var fin = variable.nom+"</div></a><br/>";
+		$('#'+idBlock).append(liens+contenu+image+fin);
+	
+	}
+	
+	function updateLink(){
+			var data = "text/json;charset=utf-8, var donnees=" + encodeURIComponent(JSON.stringify(donnees));
+			$("#getConfig").html('<a id="telechargementData" href="data:' + data + ';" download="data.js">Save Configuration</a>');
+				
+			}
+			
+	function paintDiv(){
+	// mise a jours des liste dans le formulaire
+		$('#aModifier').html('<option select="selected"/>');
+		$('#gaucheCenter').html('');
+		$('#droiteCenter').html('');
+		$("#nom").val('');
+		$("#liens").val('');
+		$("#image").val('');
+		$("#sequence").val('');
+		donnees.gaucheCenter.infos.sort(compareLink).forEach(function(variable){
+			ajouterLiens(donnees.gaucheCenter.id,variable)	
+			$('#aModifier').append('<option value="'+variable.nom+'">'+variable.nom);
+			}
+		)
+		donnees.droiteCenter.infos.sort(compareLink).forEach(function(variable){			
+			ajouterLiens(donnees.droiteCenter.id,variable)
+			$('#aModifier').append('<option value="'+variable.nom+'">'+variable.nom);			
+			}
+		)
+	}
+	function findMax(cote){
+		var max=0; 
+		donnees[cote].infos.forEach(function(variable){
+			max = max<variable.sequence? sequence : max;
+		})
+		return max;
+	}
+	function compareLink(a,b){
+		if(a.sequence > b.sequence)
+			return 1;
+		if(a.sequence < b.sequence)
+			return -1;
+		return 0;
+	}
+		$(function(){
+		//////////// Declaration des liens, maintenant dans data.js////////
+	
+		/*var donnees ={
+		gaucheCenter:{
+			id:"gaucheCenter",
+			infos:[
+					{nom:"Facebook",image:"../FB.png", 		liens:"http://www.facebook.com"},
+					{nom:"Drive",	image:"../Drive.png", 	liens:"https://drive.google.com/drive/my-drive"},
+					{nom:"Hotmail", image:"../Hotmail.png",	liens:"http://www.hotmail.com"},
+					{nom:"Gmail", 	image:"../gmail.png", 	liens:"https://mail.google.com/mail"},
+					{nom:"Youtube", image:"../YT.png",  	liens:"http://www.youtube.com/?gl=FR&hl=fr"},
+					{nom:"Campus", 	image:"../campus.ico", 	liens:"https://campusneo.mines-nantes.fr/campus/course/index.php?categoryid=516"},
+				]
+		},
+		droiteCenter:{
+			id:"droiteCenter",
+			infos:[
+					{image:"../CdN.jpg",nom:"CdN",				liens:"https://www.credit-du-nord.fr/particuliers"},
+					{image:"../ca.jpg",	nom:"Credit Agricole",	liens:"https://www.atlantique-vendee-g3-enligne.credit-agricole.fr/stb/entreeBam"},
+					{					nom:"Dico couleur html",liens:"http://www.code-couleur.com/dictionnaire/couleur-r.html"},
+					{					nom:"Zone T", 			liens:"http://www.zone-telechargement.com/series/vf/" },   
+					{image:"../IC.jpg", nom:"Info contact",		liens:"http://myinfocontact.fr/EDT/edt"} 
+				]
+			},
+		};	*/
+		//////// Ajout des div///////
+			paintDiv();
+			$('#gauche').hide();
+			$('#droite').hide();
+			
+			$('div').hide();
+			
+			$('#gauche').show(1500);
+			$('#droite').toggle(1500);
+			$('div').show();
+			$('#formulaire').hide();
+
+			
+			$('#Appliquer').click(function(){
+				var tomodify = $("#aModifier").val();
+				
+				var nom   = $("#nom").val();
+				var liens = $("#liens").val();
+				var image = $("#image").val();
+				var cote  = $("#cote").val();
+				var order  = $("#sequence").val()?$("#sequence").val():findMax(cote);
+			if(nom){	
+				if(tomodify){
+					remove(tomodify,true)
+				}
+				 var newvar = {sequence:order, nom:nom, image:image, liens:liens};
+					donnees[cote].infos.push(newvar);
+					//ajouterLiens(cote,newvar)
+					paintDiv();
+					updateLink();
+				}	
+			})
+			
+			
+			$(".contenu").mousemove(function(event){
+				$(".contenu").each(function(){
+					//alert(Math.random()*3);
+					//alert("transform" +Math.random()*3+"deg");
+					$(this).css("transform","skewX("+Math.random()*0.5+"deg) skewY("+Math.random()*5+"deg)");
+					$(this).css("transform","translateX("+Math.random()*0.5+"px) translateY("+Math.random()*5+"px)");
+			})
+			});
+			
+			$('#aModifier').change(function(){
+				let nom =$('#aModifier').val();
+				var link = findLink(nom);
+				$("#nom").val(link.nom);
+				$("#liens").val(link.liens);
+				$("#image").val(link.image);
+				$("#sequence").val(link.sequence);
+				})
+		}	
+		)
+		
+			
+	
+	</script>
+</head>
+
+<body > 	
+								
+	<div id="gauche" ><div id="blanc"></div>
+	<center id="gaucheCenter" ondrop="drop(event,'gaucheCenter')" ondragover="allowDrop(event)">
+	
+	</center>	
+	</div>
+	
+	<div id="droite" ondrop="drop(event,'droiteCenter')" ><div id="blanc"></div>
+		<center id="droiteCenter" ondragover="allowDrop(event)"></center>
+	</div>
+
+								<!-- Champ de recherche Google -->
+<center>
+<div id="centre">
+<button id="ajouter" class='ajouter' data-toggle="modal" data-target="#formulaire">+</button>
+
+<FORM method=GET action="http://www.google.fr/search">
+<div id="google" ><tr><td>
+<A HREF="http://www.google.fr">
+<IMG SRC="http://www.google.com/logos/Logo_40wht.gif" border="0" ALT="Google" align="absmiddle"></A>
+<INPUT TYPE=text name=q size=31 maxlength=255 value="">
+<INPUT TYPE=hidden name=hl value=fr>
+<INPUT type=submit name=btnG VALUE="Recherche Google">
+</td></tr>
+73936972958
+</div>
+</FORM>
+
+<!-- /Google 
+
+<div id="footer"> 
+<div id="c_3c2885fd19b0c0a4b99e10a91acab6d2" class="ancho"><h2 style="color: #CECECE; margin: 0 0 3px; padding: 2px; font: bold 13px/1.2 Verdana; text-align: center; width=100%">
+<a href="http://www.meteorama.fr/m%C3%A9t%C3%A9o-amiens.html" style="color: #CECECE; text-decoration: none; font: bold 13px/1.2 Verdana;">Meteo Amiens</a></h2>
+<div id="w_3c2885fd19b0c0a4b99e10a91acab6d2" class="ancho" style="height:100%"></div></div>
+<script type="text/javascript" src="http://www.meteorama.fr/widget/loader/3c2885fd19b0c0a4b99e10a91acab6d2"></script>
+
+<!-- /meteo !-->
+</div>
+</div>
+
+
+<div id="formulaire" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ajouter un lien</h4>
+      </div>
+      <div class="modal-body">
+        <p>Merci de renseigner au moins un nom et le liens correspondant</p>
+		<label for="aModifier">Modifier</label>
+		  <select id='aModifier'class="form-control" >
+		</select>
+		<label for="nom">  Nom  :</label><input type="text" class="form-control"name="nom" id="nom"/>
+		<label for="liens">Liens:</label><input type="text" class="form-control" name="liens" id="liens"/>
+		<label for="image">Image.extension:</label><input type="text" class="form-control"name="image" id="image"/>
+		<label for="cote">Coté:</label>
+		<select id="cote" type="select" class="form-control">
+			<option value="gaucheCenter">Gauche</option>
+			<option value="droiteCenter">Droite</option>
+		</select>
+      </div>
+	  <label for="sequence">Ordre</label><input id="sequence" type ="number" class="form-control" min="0">
+      <div class="modal-footer">
+        <button id="getConfig" type="button" class="btn btn-default" >Save Configuration</button>
+		<button id="Appliquer" type="button" class="btn btn-default">Appliquer</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+		
+      </div>
+    </div>
+
+  </div>
+  
+  
+
+ </div>
+  <button id='trash'  ondrop="drop(event)" ondragover="allowDrop(event)"> <span id='trash' class="glyphicon">&#xe020;</span><i id='trash'> Supprimer</i></button>
+</center>
+
+

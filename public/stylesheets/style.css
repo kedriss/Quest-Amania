@@ -1,0 +1,120 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+/*HISTORIQUE*/
+
+#centre{
+  /*background-color: yellow ;*/
+  width:59%;
+}
+
+#blanc
+{
+  height: 10%;
+  /*background-color: white;*/
+}
+#footer{
+  /*background-color: red;*/
+  width:100%;
+  margin-top:70%;
+
+}
+.contenu
+{
+
+  box-shadow:4px 2px 4px 4px black;
+  border-radius:8px;
+  margin-top:1%;
+  margin-left:20%;
+  margin-right:20%;
+  margin-bottom:5%;
+  float:left;
+  z-index:0;
+  width:60%;
+  position:relative;
+  padding:10px;
+  background-color:rgba(206 , 206 , 206 ,0.9);
+
+}
+.ajouter{
+  box-shadow:2px 1px 2px 2px black;
+  border-radius:50px;
+  float:left;
+  z-index:0;
+  position:relative;
+  background-color: rgba(206 , 206 , 206 ,0.9);
+}
+
+.ajouter:hover{
+  box-shadow:2px 1px 2px 2px darkblue;
+  float:left;
+  z-index:0;
+  position:relative;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.contenu:hover
+{
+
+  box-shadow:2px 1px 2px 2px darkblue;
+  border-radius:8px;
+  margin-top:1%;
+  margin-left:20%;
+  margin-right:20%;
+  margin-bottom:5%;
+  float:left;
+  z-index:0;
+  width:60%;
+  position:relative;
+  padding:10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+a:hover
+{
+  color: darkblue;
+
+}
+#gauche {
+  background-color:none;
+  width:19.5%;
+  height:100%;
+  float:left;
+  position:relative;
+}
+
+#droite {
+  background-color:none;
+  width:20.4%;
+  height:100%;
+  float:right;
+  z-index:2;
+  position:relative;
+}
+
+a {
+  color:black;
+  text-decoration:none;
+}
+body{
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-image:url(../images/fond.jpg);
+  background-attachment:center;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;     /* Gecko 1.9.2 (Firefox 3.6) */
+  -o-background-size: 100% 100%;        /* Opera 9.5 */
+  -webkit-background-size: cover;   /* Safari 3.0 */
+
+
+}
+
+.png{
+  height:20px;
+  width:20px;
+
+  float:left;
+}
