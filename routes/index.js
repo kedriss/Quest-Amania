@@ -5,14 +5,15 @@ var MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
     ObjectId = mongo.ObjectId;
 var coteOppose ={"gaucheCenter":"droiteCenter", "droiteCenter":'gaucheCenter'};
-
+var uriMongo = "mongodb://heroku_t9m2n7qd:obvtjtruvded5pmam57m3542b5@ds127978.mlab.com:27978/heroku_t9m2n7qd";
+//var uriMongo="mongodb://localhost:27017/userLinks";
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("route = /");
     var result;
     var gaucheCenter=[];
-  //var client = new MongoClient(new Server("localhost", 27017), {native_parser: true});
-    MongoClient.connect("mongodb://localhost:27017/userLinks",function(err, db) {
+    MongoClient.connect(uriMongo,function(err, db) {
+
         if(!err) {
             console.log("We are connected");
             //console.log(db);
@@ -32,7 +33,7 @@ router.get('/', function(req, res, next) {
 router.get('/lien/:side/:_id', function(req, res, next) {
     var side= req.params.side;
     var _id= new ObjectId(req.params._id);
-    MongoClient.connect("mongodb://localhost:27017/userLinks",function(err, db) {
+    MongoClient.connect(uriMongo,function(err, db) {
         if(!err) {
             console.log("We are connected");
         }
@@ -55,7 +56,7 @@ router.put('/lien', function(req, res, next) {
     var sequence = lien.sequence;
     var nom = lien.nom;
     var cote = lien.side;
-    MongoClient.connect("mongodb://localhost:27017/userLinks",function(err, db) {
+    MongoClient.connect(uriMongo,function(err, db) {
         var collection = db.collection(cote);
         var collectionOpposite = db.collection(coteOppose[cote]);
         if (_id) {
@@ -88,7 +89,7 @@ router.delete('/lien', function(req, res, next) {
     var sequence = lien.sequence;
     var nom = lien.nom;
     var cote = lien.cote;
-    MongoClient.connect("mongodb://localhost:27017/userLinks", function (err, db) {
+    MongoClient.connect(uriMongo, function (err, db) {
         var collection = db.collection(cote);
         var o_id = new ObjectId(_id);
         if (collection)
