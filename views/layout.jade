@@ -10,5 +10,9 @@ html
     script(src="/bootstrap/dist/js/bootstrap.js")
     link(rel="stylesheet", href="/bootstrap/dist/css/bootstrap.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body(class=user.nom)
-    block content
+    if(user)
+      body(class=user.nom)
+        block content
+    else
+      body
+        block content
