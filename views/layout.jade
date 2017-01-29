@@ -5,9 +5,10 @@ html
     script(src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous")
+    script(src="/javascripts/manageCookie.js")
     script(src="/javascripts/index.js")
     script(src="/bootstrap/dist/js/bootstrap.js")
     link(rel="stylesheet", href="/bootstrap/dist/css/bootstrap.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+  body(class=user.nom)
     block content
