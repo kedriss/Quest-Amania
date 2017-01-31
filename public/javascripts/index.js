@@ -145,14 +145,18 @@ $(function() {
             $.ajax({
                 url: "/lien",
                 data: params,
-                type: 'DELETE'
+                type: 'DELETE',
+                success:function(){ location.reload();}
             })
 
 
         }
         });
     })
-
+$('#deconnexion').click(function(){
+    setCookie('token',null,0);
+    location.reload();
+})
 $('#connectionButton').click(function(){
     var username = $('#username').val();
     var pwd=$('#password').val();

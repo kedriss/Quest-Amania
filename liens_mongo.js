@@ -53,14 +53,8 @@ $.ajax({ url:"/lien",type:'PUT',data:{side:'gaucheCenter',"sequence":1,"token":"
 
 $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":1,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://fr.vente-privee.com/vp4/Login/Portal.ashx", "image":"/images/VP.PNG",nom:'Ventes Privées'}});
 $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":2,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://bleuciel.edf.com/abonnement-et-contrat/les-prix/les-prix-de-l-electricite/option-ejp/l-observatoire-2584.html", "image":"/images/VP.PNG",nom:'EJP'}});
-$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":3,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://www.allocine.fr/seance/salle_gen_csalle=P1545.html", "image":"/images/VP.PNG",nom:'Cinéma'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":3,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://www.allocine.fr/seance/salle_gen_csalle=P1545.html", "image":"/images/ALLOCINE.PNG",nom:'Cinéma'}});
 $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":4,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://www.zone-telechargement.com/", "image":"/images/VP.PNG",nom:'Zone téléchargement'}});
 $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":5,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://www.cdiscountphoto.com/", "image":"/images/VP.PNG",nom:'Cdiscount photo'}});
   
-																															<a href="" target=_blank><div id="contenu"><img src="../VP.PNG"/> ventes privées</div></a><br/>
-																															<a href="http://bleuciel.edf.com/abonnement-et-contrat/les-prix/les-prix-de-l-electricite/option-ejp/l-observatoire-2584.html" target=_blank><div id="contenu"><img src="../EJP.jpg"/>EJP</div></a><br/>	
-																															<a href="http://www.allocine.fr/seance/salle_gen_csalle=P1545.html" target=_blank><div id="contenu"><img src="../ALLOCINE.png"/> Cinéma</div></a><br/>	
-																															<a href="http://www.zone-telechargement.com/"target=_blank><div id="contenu" ><img src="http://www.zone-telechargement.com/templates/ZONE/images/favicon.ico"/> Zone téléchargement</div></a><br/>
-																															<a href="http://www.cdiscountphoto.com/" target=_blank><div id="contenu" ><img src="../Cdiscount.jpg"/>Cdiscount photo</div></a>    
-	
-
+																														
