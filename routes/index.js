@@ -5,9 +5,10 @@ var MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
     ObjectId = mongo.ObjectId;
 var coteOppose ={"gaucheCenter":"droiteCenter", "droiteCenter":'gaucheCenter'};
-var uriMongo = "mongodb://heroku_t9m2n7qd:obvtjtruvded5pmam57m3542b5@ds127978.mlab.com:27978/heroku_t9m2n7qd";
+var uriMongo=process.env.MONGODB_URI; // utilisation d'une varible d'environnement pour la sécurité
 //var uriMongo="mongodb://localhost:27017/userLinks";
 
+console.log(uriMongo);
 var checktoken = function(token){
 
     return new Promise(function(resolve,reject){
