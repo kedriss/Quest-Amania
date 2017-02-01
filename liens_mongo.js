@@ -57,4 +57,27 @@ $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":3,"token":"
 $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":4,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://www.zone-telechargement.com/", "image":"/images/VP.PNG",nom:'Zone téléchargement'}});
 $.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":5,"token":"7940b3cdc3f5e9f94fc2def84f16a2527b25696b",liens:"http://www.cdiscountphoto.com/", "image":"/images/VP.PNG",nom:'Cdiscount photo'}});
   
-																														
+		
+
+
+
+/////////Famille Linque////////:
+{"_id":{"$oid": "588dfa65f36d2804078ae9c1"},
+		"username": "mariepierre",
+		"password": "irkutoo",
+		"token": "936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2"
+}
+
+$.ajax({ url:"/lien",type:'PUT',data:{side:'gaucheCenter',"sequence":0,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.ebay.fr",nom:'Ebay'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'gaucheCenter',"sequence":1,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.leboncoin.fr",nom:'Le Bon Coin'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'gaucheCenter',"sequence":2,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"https://www.credit-du-nord.fr/particuliers",nom:'Le Bon Coin'}});
+                                                                                
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":1,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.canalblog.com/directory/Cuisine%20et%20Gastronomie/",nom:'Petit plats'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":2,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.promod.com/", nom:'Promod'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":3,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.cop-copine.com/",nom:'Cop Salope'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":4,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.esprit.fr/", nom:'Esprit'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":5,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.aristosoie.org/", nom:'Aristosoie'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":6,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.maty.com/", nom:'Maty'}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":7,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.perlesandco.com/?cPath=50_183",nom:"Perles'n Co"}});
+$.ajax({ url:"/lien",type:'PUT',data:{side:'droiteCenter',"sequence":8,"token":"936B8F0034B3B80C93C27D70F3998FA23865BE4389F6584D1A1D56DABB2B29E2",liens:"http://www.lesbijouxdeclementine.com/boutique/liste_produits.cfm?code_lg=lg_fr&type=21", nom:'B-Clémentine'}});
+  		

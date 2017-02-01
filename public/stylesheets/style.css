@@ -212,5 +212,95 @@ body.anne{
   background-image:url(/images/fondAnne.jpg);
 
 }
+/*   MARIEPIERRE  */
+body.mariepierre .erreur{
+  color: red;
+  font-size:0.8em;
+  font-weigth:bold;
+}
+
+body.mariepierre #meteo{
+  border-radius:8px;
+  float:bottom;
+}
+body.mariepierre #centre{
+  background-color:;
+
+  width:59%;
+  height:100%;
+
+}
+body.mariepierre #blanc
+{
+  height: 10%;
+  background-color:;
+
+}
+
+body.mariepierre .contenu:hover
+{
+
+  box-shadow:2px 1px 2px 2px white;
+  border-radius:8px;
+  margin-top:7%;
+  margin-left:25%;
+  margin-right:20%;
+  margin-bottom:2%;
+  float:left;
+  z-index:0;
+  height: 2%;
+  width:50%;
+  position:relative;
+  padding-bottom:8px;
+  background-color:rgba(237, 0, 0, 0.9);
+}
+body.mariepierre .contenu
+{
+  box-shadow:2px 1px 2px 2px red;
+  border-radius:8px;
+  margin-top:7%;
+  margin-left:25%;
+  margin-right:20%;
+  margin-bottom:2%;
+  float:left;
+  z-index:0;
+  height: 2%;
+  width:50%;
+  position:relative;
+  padding-bottom:8px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+body.mariepierre  a:hover
+{
+  color: white;
+
+}
+body.mariepierre #gauche {
+  background-color:;
+  width:19.5%;
+  height:100%;
+  float:left;
+  position:relative;
+}
+
+body.mariepierre #droite {
+  width:20.4%;
+  height:100%;
+  float:right;
+  z-index:2;
+  position:relative;
+}
+
+body.mariepierre a {
+  color:black;
+  text-decoration:none;
+}
+body.mariepierre {
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-image:url(/images/fondmariepierre.jpg);
+
+}
+
 
 
