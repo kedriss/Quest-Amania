@@ -15,7 +15,7 @@ $(function(){
             success:function(data){
                 token = data.token;
                 console.log(data);
-                setCookie('token',token,1);
+                setCookie('token',token,360);
                 if(token){
                     $('#connection').modal('toggle');
                     location.reload();

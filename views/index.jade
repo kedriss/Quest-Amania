@@ -25,6 +25,8 @@ block content
                 icone(class="glyphicon glyphicon-plus-sign")
             button(id="deconnexion", class='ajouter')
                 icone(class="glyphicon glyphicon-off")
+            button(id="AfficheTan", class='ajouter',data-toggle="modal",data-target="#tan")
+                icone(class="glyphicon glyphicon-off")
             FORM(method=GET, action="http://www.google.fr/search")
                 #google
                     tr
@@ -34,6 +36,14 @@ block content
                             INPUT(TYPE='text', name='q', size=31, maxlength=255, value="")
                             INPUT(TYPE='hidden', name=hl ,value=fr)
                             INPUT(type='submit', name=btnG, VALUE="Recherche Google")
+        #tan(class="modal fade", role="dialog")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        button(type="button", class="close", data-dismiss="modal")='x'
+                        h4(class="modal-title")="Trouver un arret"
+                    .modal-body
+                        iframe(src='http://localhost:3000/arrets', class='tan')
         #formulaire(class="modal fade", role="dialog")
             .modal-dialog
                 .modal-content
