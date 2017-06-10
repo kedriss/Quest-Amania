@@ -92,6 +92,7 @@ $(function() {
                 $("#liens").val(link.liens);
                 $("#image").val(link.image);
                 $("#sequence").val(link.sequence);
+                $("#cote").val(info[1]);
 
             });
         } else {
