@@ -108,8 +108,10 @@ var authentificate = function(req){
                         reject(new Error('Conexion refusée'));
                 })
             }
-            else
-                reject(new Error('Conexion impossible'));
+            else {
+                console.log(err);
+                reject(new Error('Connexion impossible'));
+            }
         });
     });
 }
