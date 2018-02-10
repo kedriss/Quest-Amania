@@ -132,6 +132,42 @@ $(function() {
         });
     })
 
+        $('#Repondre').click(function () {
+                var nom = $("#nom").val();
+                var prenom = $("#prenom").val();
+                if (nom && prenom) {
+                    var date_nbpersonne = {};
+                    var t_date_nbpersonne = [];
+                    var reponse = {nom: nom, prenom: prenom, responses: []};
+
+                    var t_dates = ['05/03/1990', '13/03/1989'];
+                    t_dates.forEach(function (value, index) {
+                        t_date_nbpersonne.push({date: value, nbPersonne: $("#NbPersonne" + index).val()})
+                    });
+                    reponse.responses = t_date_nbpersonne;
+                    console.log(reponse);
+
+                    $.ajax({
+                        url: "/krakotte",
+                        data: reponse,
+                        type: 'PUT',
+                        success:function(){
+                            $('#Repondre').hide();
+                        alert('Votre réponse a été enregistrée.' +
+                            'Merci et a bientôt!');
+                            $('#formulaire').remove();}
+                    })
+                }else{
+                    if ( !nom )
+                    $("#nom").focus();
+                    else
+                        $("#prenom").focus();
+                }
+
+
+
+        })
+
     $('#Supprimer').click(function () {
         var tomodify = $("#aModifier").val();
         var _id;

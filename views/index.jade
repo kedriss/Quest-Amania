@@ -2,6 +2,9 @@ extends layout
 block content
     - var linkToModify ={}
     center
+        form(ref='uploadForm',id='uploadForm',action='/upload',  method='post', encType="multipart/form-data" )
+            input(type="file", name="sampleFile")
+            input(type='submit', value='Upload!')
         #gauche
             #blanc
             #gaucheCenter(ondrop="drop(event,'gaucheCenter')",ondragover="allowDrop(event)")

@@ -100,7 +100,7 @@ a {
 body{
   background-size:cover;
   background-repeat:no-repeat;
-  background-image:url(../images/fond.jpg);
+ /* background-image:url(../images/fond.jpg);*/
   background-attachment:center;
   background-size: 100% 100%;
   -moz-background-size: 100% 100%;     /* Gecko 1.9.2 (Firefox 3.6) */

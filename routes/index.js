@@ -56,8 +56,55 @@ function checkCookieToken(request){
     })
 }
 router.get('/', function(req, res, next) {
-racine(req,res,next);
+    racine(req,res,next);
 
+});
+router.get('/krakotte', function(req, res, next) {
+    krakotte(req,res,next);
+
+});
+
+router.put('/krakotte', function(req, res, next) {
+    //put_krakotte(req,res,next);
+
+   /* var lien = req.body;
+    var _id =lien._id;
+    var url = lien.liens;
+    var image = lien.image;
+    var sequence = lien.sequence;
+    var nom = lien.nom;
+    var token = lien.token;
+    var cote = lien.side;
+
+
+    checktoken(token).then(function(){
+        MongoClient.connect(uriMongo,function(err, db) {
+            var collection = db.collection(cote);
+            var collectionOpposite = db.collection(coteOppose[cote]);
+            if (_id) {
+                var o_id = new ObjectId(_id);
+                if (collection){
+                    collection.find({_id:o_id}).toArray().then(function(data) {
+                        if (data && data.length > 0) {
+                            collection.updateOne({_id: o_id}, {nom: nom, liens: url, image: image, sequence: sequence,token:token});
+                        }
+                        else if(collectionOpposite) { // SI on a pas trouver sur le cote, c'est qu'il faut le supprimer sur le coté opposé et creer dans le coté
+                            collectionOpposite.deleteOne({_id:o_id});
+                            collection.insertOne({nom:nom,liens:url, image:image,sequence:sequence,token:token});
+                        }
+                    })
+                }
+            }
+            else{
+                if(collection)
+                    collection.insertOne({nom: nom, liens: url, image: image, sequence: sequence,token:token});
+            }
+            res.json({});
+        })
+    });
+
+*/
+    res.json({});
 });
 router.post('/', function(req, res, next) {
     racine(req,res,next);
@@ -91,6 +138,17 @@ var racine = function(req,res,next){
             title: "Connexion"
         });
     })
+}
+var krakotte = function(req,res,next){
+   var result;
+    var gaucheCenter=[];
+    var t_dates = ['05/03/1990','13/03/1989'];
+    res.render('krakotte', {
+        title: "Merci de répondre au questionnaire",
+        dates:t_dates,
+
+    });
+
 }
 var authentificate = function(req){
     return new Promise(function (resolve ,reject) {
