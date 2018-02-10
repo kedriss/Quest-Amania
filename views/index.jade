@@ -2,9 +2,9 @@ extends layout
 block content
     - var linkToModify ={}
     center
-        form(ref='uploadForm',id='uploadForm',action='/upload',  method='post', encType="multipart/form-data" )
-            input(type="file", name="sampleFile")
-            input(type='submit', value='Upload!')
+        //form(ref='uploadForm',id='uploadForm',action='/upload',  method='post', encType="multipart/form-data" )
+        //    input(type="file", name="sampleFile")
+        //    input(type='submit', value='Upload!')
         #gauche
             #blanc
             #gaucheCenter(ondrop="drop(event,'gaucheCenter')",ondragover="allowDrop(event)")
@@ -29,7 +29,7 @@ block content
             button(id="deconnexion", class='ajouter')
                 icone(class="glyphicon glyphicon-off")
             button(id="AfficheTan", class='ajouter',data-toggle="modal",data-target="#tan")
-                icone(class="glyphicon glyphicon-off")
+                icone(class="glyphicon glyphicon-road")
             FORM(method=GET, action="http://www.google.fr/search")
                 #google
                     tr

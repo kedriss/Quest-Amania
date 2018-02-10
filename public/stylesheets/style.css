@@ -116,6 +116,12 @@ body{
   float:left;
 }
 
+body.kedriss{
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-image:url(../images/fond.jpg);
+
+}
 /*/////////anne///////////*/
 
 .anne.erreur{
@@ -123,6 +129,7 @@ body{
   font-size:0.8em;
   font-weigth:bold;
 }
+
 
 body.anne. #meteo{
   border-radius:8px;
