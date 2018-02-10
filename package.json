@@ -15,9 +15,9 @@
     "jQuery": "~1.7.4",
     "jade": "~1.11.0",
     "jsdom": "~9.9.1",
-    "mongodb": "~2.2.21",
+    "mongodb": "^2.2.34",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "multer" : "0.1.6"
+    "multer": "0.1.6",
+    "serve-favicon": "~2.3.0"
   }
 }
