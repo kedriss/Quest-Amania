@@ -137,18 +137,21 @@ $(function() {
                 var prenom = $("#prenom").val();
                 if (nom && prenom) {
                     var date_nbpersonne = {};
-                    var t_date_nbpersonne = [];
+                    var t_nbpersonne = [];
+                    var t_dates = [];
                     var reponse = {nom: nom, prenom: prenom, responses: []};
 
-                    var t_dates = ['05/03/1990', '13/03/1989'];
-                    t_dates.forEach(function (value, index) {
-                        t_date_nbpersonne.push({date: value, nbPersonne: $("#NbPersonne" + index).val()})
+                    $("input[name='NbPersonne']").each(function ( index,value) {
+                        t_dates.push( $("#NbPersonne" + index).attr('data'));
+                        t_nbpersonne.push($("#NbPersonne" + index).val());
                     });
-                    reponse.responses = t_date_nbpersonne;
+                    reponse.dates = t_dates;
+                    reponse.id_survey =$("#id_survey").val();
+                    reponse.nbpersonnes= t_nbpersonne;
                     console.log(reponse);
 
                     $.ajax({
-                        url: "/krakotte",
+                        url: "/response",
                         data: reponse,
                         type: 'PUT',
                         success:function(){

@@ -4,11 +4,11 @@ var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
     ObjectId = mongo.ObjectId;
-var coteOppose ={"gaucheCenter":"droiteCenter", "droiteCenter":'gaucheCenter'};
-var uriMongo=process.env.MONGODB_URI; // utilisation d'une varible d'environnement pour la sécurité
-//var uriMongo="mongodb://localhost:27017/userLinks";
+var uriMongo=process.env.MONGODB_URI_QUEST; // utilisation d'une varible d'environnement pour la sécurité
 
-console.log(uriMongo);
+var version_appli = process.env.QUESTAMANIA_VERSION;
+var collection_name ="QUEST-AMANIA";
+console.log("uriMongo="+uriMongo);
 var checktoken = function(token){
 
     return new Promise(function(resolve,reject){
@@ -59,53 +59,121 @@ router.get('/', function(req, res, next) {
     racine(req,res,next);
 
 });
-router.get('/krakotte', function(req, res, next) {
-    krakotte(req,res,next);
+router.get('/survey/:id', function(req, res, next) {
+console.log("dans le survey "+req.params.id)
+    event(req,res,next,'response');
 
 });
 
-router.put('/krakotte', function(req, res, next) {
+router.get('/event/:id', function(req, res, next) {
+     event(req,res,next,'AdminEvent');
+
+});
+router.get('/event', function(req, res, next) {
+    //event(req,res,next,'AdminEvent');
+    res.render('AdminEvent', {
+        title: "Merci de répondre au questionnaire",
+        evenement: {nom: null, description:null,dates:null,type:'evenement', version: version_appli},
+    });
+
+});
+
+router.get('/events', function(req, res, next) {
+    events(req,res,next);
+
+});
+
+router.put('/survey', function(req, res, next) {
     //put_krakotte(req,res,next);
 
-   /* var lien = req.body;
-    var _id =lien._id;
-    var url = lien.liens;
-    var image = lien.image;
-    var sequence = lien.sequence;
-    var nom = lien.nom;
-    var token = lien.token;
-    var cote = lien.side;
+    var survey = req.body;
+    var _id =survey._id;
+    var nom = survey.nom;
+    var description = survey.description;
+    var dates =survey['dates[]'];
+    if ( ! survey['dates[]']) dates =[];
+    if (!Array.isArray(dates)) dates=[dates];
+    console.log(survey);
 
-
-    checktoken(token).then(function(){
+    // checktoken(token).then(function(){
         MongoClient.connect(uriMongo,function(err, db) {
-            var collection = db.collection(cote);
-            var collectionOpposite = db.collection(coteOppose[cote]);
+             var collection = db.collection(collection_name);
             if (_id) {
                 var o_id = new ObjectId(_id);
                 if (collection){
                     collection.find({_id:o_id}).toArray().then(function(data) {
-                        if (data && data.length > 0) {
-                            collection.updateOne({_id: o_id}, {nom: nom, liens: url, image: image, sequence: sequence,token:token});
-                        }
-                        else if(collectionOpposite) { // SI on a pas trouver sur le cote, c'est qu'il faut le supprimer sur le coté opposé et creer dans le coté
-                            collectionOpposite.deleteOne({_id:o_id});
-                            collection.insertOne({nom:nom,liens:url, image:image,sequence:sequence,token:token});
-                        }
+                        if (data && data.length > 0)
+                            collection.updateOne(
+                                {_id: o_id}, {nom: nom, description:description,dates:dates,type:'evenement', version: version_appli});
+                        else
+                            collection.insertOne(
+                                {nom: nom, description:description,dates:dates,type:'evenement', version: version_appli});
+
                     })
                 }
             }
             else{
                 if(collection)
-                    collection.insertOne({nom: nom, liens: url, image: image, sequence: sequence,token:token});
+                    collection.insertOne({nom: nom, description:description,dates:dates,type:'evenement', version: version_appli});
             }
             res.json({});
         })
     });
 
-*/
-    res.json({});
+
+   // res.json({});
+//});
+
+
+router.put('/response', function(req, res, next) {
+    //put_krakotte(req,res,next);
+    var data_type = 'response';
+    var response = req.body;
+    var _id =response._id;
+    var nom = response.nom;
+    var prenom = response.prenom;
+    var id_survey = response.id_survey;
+    var dates =response['dates[]'];
+    if ( ! response['dates[]']) dates =[];
+    if (!Array.isArray(dates)) dates=[dates];
+
+    var nbpersonnes =response['nbpersonnes[]'];
+    if ( ! response['nbpersonnes[]']) nbpersonnes =[];
+    if (!Array.isArray(nbpersonnes)) nbpersonnes=[nbpersonnes];
+
+    var responses =[]
+    console.log(response);
+    dates.forEach(function(value,index){
+        responses.push({date:dates[index],nbpersonne:nbpersonnes[index]});
+    })
+
+    // checktoken(token).then(function(){
+    MongoClient.connect(uriMongo,function(err, db) {
+        var collection = db.collection(collection_name);
+        if (_id) {
+            var o_id = new ObjectId(_id);
+            if (collection){
+                collection.find({_id:o_id}).toArray().then(function(data) {
+                    if (data && data.length > 0)
+                        collection.updateOne(
+                            {_id: o_id}, {nom: nom, prenom:prenom ,responses:responses,type:data_type, version: version_appli, id_survey:id_survey});
+                    else
+                        collection.insertOne(
+                            {nom: nom, prenom:prenom ,responses:responses,type:data_type, version: version_appli,id_survey:id_survey});
+
+                })
+            }
+        }
+        else{
+            if(collection) {
+                collection.insertOne({nom: nom, prenom: prenom, responses: responses, type: data_type, version: version_appli,id_survey:id_survey});
+
+            }
+        }
+        res.json({});
+    })
 });
+
 router.post('/', function(req, res, next) {
     racine(req,res,next);
 
@@ -139,13 +207,79 @@ var racine = function(req,res,next){
         });
     })
 }
-var krakotte = function(req,res,next){
-   var result;
-    var gaucheCenter=[];
-    var t_dates = ['05/03/1990','13/03/1989'];
-    res.render('krakotte', {
-        title: "Merci de répondre au questionnaire",
-        dates:t_dates,
+var events = function(req,res,next){
+    var viewName = 'AdminEvents';
+    var id= req.params.id;
+    //var _id= new ObjectId(req.params._id);
+    console.log(id)
+    var o_id = new ObjectId(id);
+    MongoClient.connect(uriMongo,function(err, db) {
+        if(!err) {
+            console.log("We are connected");
+        }
+        var collection = db.collection(collection_name);
+        //console.log(collection);
+        collection.find({'type':'evenement'}).toArray().then(function(result) {
+            if (result && result.length > 0) {
+
+                //var result;
+                var gaucheCenter = [];
+                console.log(result)
+                //var t_dates = ['05/03/1990', '13/03/1989'];
+                res.render(viewName, {
+                    title: "Liste des événements",
+                    evenements: result,
+                });
+                // res.json(result[0]);
+            }
+            else {
+                //res.json(null);
+                res.render(viewName, {
+                    title: "Pas d'événement",
+                    evenements: null,
+                });
+            }
+
+        })
+
+    });
+
+}
+
+var event = function(req,res,next,viewName){
+
+    var id= req.params.id;
+    //var _id= new ObjectId(req.params._id);
+    console.log(id)
+    var o_id = new ObjectId(id);
+    MongoClient.connect(uriMongo,function(err, db) {
+        if(!err) {
+            console.log("We are connected");
+        }
+        var collection = db.collection(collection_name);
+        //console.log(collection);
+        collection.find({'_id':o_id,'type':'evenement'}).toArray().then(function(result) {
+            if (result && result.length > 0) {
+
+                //var result;
+                var gaucheCenter = [];
+                console.log(result[0])
+                //var t_dates = ['05/03/1990', '13/03/1989'];
+                res.render(viewName, {
+                    title: "Merci de répondre au questionnaire",
+                    evenement: result[0],
+                });
+                // res.json(result[0]);
+            }
+            else {
+                //res.json(null);
+                res.render(viewName, {
+                    title: "Merci de répondre au questionnaire",
+                    evenement: null,
+                });
+            }
+
+        })
 
     });
 

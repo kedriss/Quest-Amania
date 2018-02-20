@@ -1,0 +1,25 @@
+extends layout
+block content
+    #formulaire()
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button(type="button", class="close", data-dismiss="modal")='x'
+                    h4(class="modal-title")="Liste des evenenements"
+                .modal-body
+                    ul(class='list-group')
+                       if(evenements)
+                            each evenement, index_evenement in evenements
+                                li(class="list-group-item")
+                                    a(href='/event/'+evenement._id)
+                                        label(for="nom")=evenement.nom
+                                    br
+                                    a(href='/survey/'+evenement._id)
+                                        label(for="nom")='Lien du questionnaire'
+                        li(class="list-group-item")
+                            a(href='/event')
+                                 button(id="Addone", type="button", class="btn btn-default")
+                                    icone(class="glyphicon glyphicon-plus   ")
+
+    footer
+        script(src="/javascripts/event.js")

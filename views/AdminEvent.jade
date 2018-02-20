@@ -1,0 +1,30 @@
+extends layout
+block content
+    #formulaire()
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button(type="button", class="close", data-dismiss="modal")='x'
+                    h4(class="modal-title")="Creer un événement"
+                .modal-body
+                    p=""
+                    label(for="nom")=" Nom du Questionnaire  :"
+                    input( type="text", class="form-control",name="nom", id="nom", value=evenement.nom)
+                    label(for="libelle")=" Libelle  :"
+                    input( type="text", class="form-control",name="description", id="description", value=evenement.description)
+                    label(for="date0")="Dates  :"
+                    ul(role="menu")
+                        div(id="listdate")
+                            if (evenement.dates)
+                                each date, index in evenement.dates
+                                    //li(class="divider")
+                                    input(type="date",class="form-control",name="date", id="date"+index,min="0", value=date)
+                        button(id="Addone", type="button", class="btn btn-default")
+                            icone(class="glyphicon glyphicon-plus   ")
+                        input(id='_id',type="hidden",value =evenement._id)
+                    .modal-footer
+                         button(id="CreerEvenement", type="button", class="btn btn-default")
+                            icone(class="glyphicon glyphicon-ok")
+
+    footer
+        script(src="/javascripts/event.js")

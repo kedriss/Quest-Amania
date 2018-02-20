@@ -52,3 +52,12 @@ db.users.insert({	"_id": new ObjectId( "588dfa65f36d2804078ae9c1"),
 		"password": "",
 		"token": ""
 }
+
+
+db.Quest-Amania.insert(
+	{"_id" : ObjectId("588237145e79b979ef153aa6"),
+		"type":"evenement",
+		"idevenement":0,
+		"libelle":"Evenemnt 1",
+		"dates":['05/03/1990']
+	});

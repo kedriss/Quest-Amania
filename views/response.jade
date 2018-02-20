@@ -5,7 +5,7 @@ block content
             .modal-content
                 .modal-header
                     button(type="button", class="close", data-dismiss="modal")='x'
-                    h4(class="modal-title")="Organisation Soirée Cat-Amania"
+                    h4(class="modal-title")=evenement.libelle
                 .modal-body
                     p="Merci de vous identifier."
                     br
@@ -16,15 +16,12 @@ block content
                     input( type="text", class="form-control",name="prenom", id="prenom")
                     h2(class="modal-title", for="NbPersonne")="C'est parti pour chaque date!"
                     ul(role="menu")
-                        each date, index in dates
+                        each date, index in evenement.dates
                             li(class="divider")
                                 h4(class="modal-title", for="NbPersonne")="Date:"+date
                                 label(for="NbPersonne")="Nombre de personne (Vous compris)"
-                                input(type="number",class="form-control",name="NbPersonne", id="NbPersonne"+index,min="0", value="0")
-
+                                input(type="number",data=date,class="form-control",name="NbPersonne", id="NbPersonne"+index,min="0", value="0")
+                    input(id="id_survey",value=evenement._id, type="hidden")
                     .modal-footer
-                        button(id="Supprimer", type="button", class="btn btn-default")
-                            icone(class="glyphicon glyphicon-trash")
                         button(id="Repondre", type="button", class="btn btn-default")
                             icone(class="glyphicon glyphicon-ok")
-                        button(type="button", class="btn btn-default", data-dismiss="modal")='Fermer'
