@@ -2,12 +2,12 @@
  * Created by kedri on 12/02/2018.
  */
 
-$("#Addone").click(function(){
+$("#Addone").click(function () {
 
     $(document.createElement('input'))
-        .attr('type',"date")
-        .attr('class','form-control')
-        .attr('name','date')
+        .attr('type', "date")
+        .attr('class', 'form-control')
+        .attr('name', 'date')
         .attr("id", 'date' + $('input[name$="date"]').length).appendTo('#listdate');
 })
 
@@ -21,11 +21,11 @@ $('#CreerEvenement').click(function () {
         var t_date_nbpersonne = [];
         var survey = {nom: nom, description: description, dates: []};
 
-        var t_dates =[];
-        var i=0;
-        while($('#date'+i).val()){
-           // console.log($('#date'+i).val());
-            t_dates.push($('#date'+i).val());
+        var t_dates = [];
+        var i = 0;
+        while ($('#date' + i).val()) {
+            // console.log($('#date'+i).val());
+            t_dates.push($('#date' + i).val());
             i++;
         }
         survey.dates = t_dates;
@@ -36,18 +36,17 @@ $('#CreerEvenement').click(function () {
             url: "/survey",
             data: survey,
             type: 'PUT',
-            success:function(){
+            success: function () {
                 window.location.replace("/events");
 
             }
         })
-    }else{
-        if ( !nom )
+    } else {
+        if (!nom)
             $("#nom").focus();
         else
             $("#description").focus();
     }
-
 
 
 })
