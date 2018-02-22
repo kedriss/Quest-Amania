@@ -170,6 +170,7 @@ $(function () {
                         alert('Votre réponse a été enregistrée.' +
                             'Merci et a bientôt!');
                         $('#formulaire').remove();
+                        window.location.replace('http://coukie24.o.c.f.unblog.fr/files/2012/07/smiley_pouce.png');
                     }
                 })
             } else {

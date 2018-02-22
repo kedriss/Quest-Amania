@@ -219,7 +219,7 @@ var events = function(req,res,next){
         }
         var collection = db.collection(collection_name);
         //console.log(collection);
-        collection.find({'type':'evenement'}).toArray().then(function(result) {
+        collection.find({'type':'evenement',version:version_appli}).toArray().then(function(result) {
             if (result && result.length > 0) {
 
                 //var result;
@@ -258,7 +258,7 @@ var event = function(req,res,next,viewName){
         }
         var collection = db.collection(collection_name);
         //console.log(collection);
-        collection.find({'_id':o_id,'type':'evenement'}).toArray().then(function(result) {
+        collection.find({'_id':o_id,'type':'evenement',version:version_appli}).toArray().then(function(result) {
             if (result && result.length > 0) {
 
                 //var result;

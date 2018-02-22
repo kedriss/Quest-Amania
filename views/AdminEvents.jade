@@ -11,11 +11,12 @@ block content
                        if(evenements)
                             each evenement, index_evenement in evenements
                                 li(class="list-group-item")
-                                    a(href='/event/'+evenement._id)
-                                        label(for="nom")=evenement.nom
+                                    label(for="nom")=evenement.nom
                                     br
+                                    a(href='/event/'+evenement._id)
+                                        span(class='badge badge-secondary')='Modifier'
                                     a(href='/survey/'+evenement._id)
-                                        label(for="nom")='Lien du questionnaire'
+                                        span(class='badge badge-secondary')='Partager'
                         li(class="list-group-item")
                             a(href='/event')
                                  button(id="Addone", type="button", class="btn btn-default")
